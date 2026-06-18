@@ -155,7 +155,7 @@ footer {
 }
 
 .pokemon-type-electric {
-  --pokemon-type-color: #fd3;
+  --pokemon-type-color: rgb(255, 227, 87);
 }
 
 .pokemon-type-fairy {
