@@ -147,7 +147,7 @@ footer {
 }
 
 .pokemon-type-dark {
-  --pokemon-type-color: #754;
+  --pokemon-type-color: rgb(73, 6, 101);
 }
 
 .pokemon-type-dragon {
