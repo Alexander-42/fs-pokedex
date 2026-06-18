@@ -163,7 +163,7 @@ footer {
 }
 
 .pokemon-type-fighting {
-  --pokemon-type-color: #c33;
+  --pokemon-type-color: rgb(201, 34, 34);
 }
 
 .pokemon-type-fire {
