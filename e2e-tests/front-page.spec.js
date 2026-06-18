@@ -1,4 +1,6 @@
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+/* eslint-disable no-undef */
+const { test, describe, expect } = require('@playwright/test')
+/* esling-enable no-undef */
 
 describe('Pokedex', () => {
   test('front page can be opened', async ({ page }) => {
