@@ -71,7 +71,7 @@ jobs:
   failure_notification:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
-    if: ${{ needs.simple_deployment_pipeline.result == 'failure' && github.event_name == 'push' }}
+    if: ${{ needs.simple_deployment_pipeline.result == 'failure' }}
     steps:
       - uses: actions/checkout@v6
       - uses: sarisia/actions-status-discord@v1.16.0
