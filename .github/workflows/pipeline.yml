@@ -80,6 +80,7 @@ jobs:
           status: ${{ needs.simple_deployment_pipeline.result }}
           content: ":x: **Build Failed!** The pipeline encountered an error"
           title: "Failure Details"
+          notimestamp: true
           nodetail: true
           description: |
             **Repository:** ${{ github.repository }}
