@@ -62,14 +62,13 @@ jobs:
           content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
           title: "Deployment Details"
           nodetail: true
-          nodate: true
+          notimestamp: true
           description: |
             **Commit:** ${{ github.event.head_commit.id }}
             **Message:** ${{ github.event.head_commit.message }}
             **Author:** ${{ github.event.head_commit.author.name }}
 
   failure_notification:
-    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     if: ${{ needs.simple_deployment_pipeline.result == 'failure' }}
     steps:
