@@ -91,5 +91,5 @@ jobs:
             **Workflow:** ${{ github.workflow }}
             **Job:** simple_deployment_pipeline
 
-            [view commit](${{ github.event.head_commit.url }})
-            [view commit](${{ github.workflow.url }})
+            [view commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            [view commit](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
