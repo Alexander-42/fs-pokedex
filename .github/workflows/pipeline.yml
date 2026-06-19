@@ -54,8 +54,11 @@ jobs:
     if: ${{ needs.simple_deployment_pipeline.result == 'success' && github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v6
+      - name: Echo author
+        run: |
+          echo "${{ github.event.head_commit.author }}"
       - uses: sarisia/actions-status-discord@v1.16.0
-        if: always()
+        if: 1 == 2
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ needs.simple_deployment_pipeline.result }}
