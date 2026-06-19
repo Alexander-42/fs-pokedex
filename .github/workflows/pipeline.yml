@@ -62,7 +62,7 @@ jobs:
           content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
           title: "Deployment Details"
           nodetail: true
-          nodate: true
+          notimestamp: true
           description: |
             **Commit:** ${{ github.event.head_commit.id }}
             **Message:** ${{ github.event.head_commit.message }}
@@ -71,16 +71,16 @@ jobs:
   failure_notification:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
-    if: ${{ needs.simple_deployment_pipeline.result == 'failure' && github.event_name == 'push' }}
+    if: ${{ always() && needs.simple_deployment_pipeline.result == 'failure' }}
     steps:
       - uses: actions/checkout@v6
       - uses: sarisia/actions-status-discord@v1.16.0
-        if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEB_HOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ needs.simple_deployment_pipeline.result }}
           content: ":x: **Build Failed!** The pipeline encountered an error"
           title: "Failure Details"
+          notimestamp: true
           nodetail: true
           description: |
             **Repository:** ${{ github.repository }}
@@ -91,5 +91,5 @@ jobs:
             **Workflow:** ${{ github.workflow }}
             **Job:** simple_deployment_pipeline
 
-            [view commit](${{ github.event.head_commit.url }})
-            [view commit](${{ github.workflow.url }})
+            [view commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            [view commit](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
