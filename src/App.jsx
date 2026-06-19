@@ -10,7 +10,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
   id: parseInt(url.match(/\/(\d+)\//)[1])
-})))
+})));
 
 const App = () => {
   const match = useMatch('/pokemon/:name')
@@ -30,7 +30,7 @@ const App = () => {
     const pokemonId = pokemonList.find(({ name }) => name === match.params.name).id
     previous = pokemonList.find(({ id }) => id === pokemonId - 1)
     next = pokemonList.find(({ id }) => id === pokemonId + 1)
-  };
+  }
 
   return (
     <Routes>
