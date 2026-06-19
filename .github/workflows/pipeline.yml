@@ -69,6 +69,7 @@ jobs:
             **Author:** ${{ github.event.head_commit.author.name }}
 
   failure_notification:
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     if: ${{ needs.simple_deployment_pipeline.result == 'failure' }}
     steps:
