@@ -46,5 +46,45 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+  
+  success_notification:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    if: ${{ needs.simple_deployment_pipeline.result == 'success' && github.event_name == 'push' }}
+    steps:
+      - uses: sarisia/actions-status-discord@v1.16.0
+      - uses: actions/checkout@v6
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEB_HOOK }}
+          status: ${{ needs.simple_deployment_pipeline.result }}
+          content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
+          title: "Deployment Details"
+          nodetail: true
+          description: |
+            **Commit:** ${{ github.event.head_commit.id }}
+            **Message:** ${{ github.event.head_commit.message }}
+            **Author:** ${{ github.event.head_commit.author }}
 
-      
+  failure_notification:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    if: ${{ needs.simple_deployment_pipeline.result == 'failure' && github.event_name == 'push' }}
+    steps:
+      - uses: sarisia/actions-status-discord@v1.16.0
+      - uses: actions/checkout@v6
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEB_HOOK }}
+          status: ${{ needs.simple_deployment_pipeline.result }}
+          content: ":x: **Build Failed!** The pipeline encountered an error"
+          title: "Failure Details"
+          nodetail: true
+          description: |
+            **Repository:** ${{ github.repository }}
+            **Branch:** ${{ github.repository.Branch }}
+            **Commit:** ${{ github.event.head_commit.id }}
+            **Message:** ${{ github.event.head_commit.message }}
+            **Author:** ${{ github.event.head_commit.author }}
+            **Workflow:** ${{ github.workflow }}
+            **Job:** simple_deployment_pipeline
