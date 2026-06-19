@@ -57,7 +57,7 @@ jobs:
       - uses: actions/checkout@v6
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEB_HOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ needs.simple_deployment_pipeline.result }}
           content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
           title: "Deployment Details"
