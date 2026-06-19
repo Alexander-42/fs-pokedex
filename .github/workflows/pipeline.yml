@@ -53,11 +53,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.simple_deployment_pipeline.result == 'success' && github.event_name == 'push' }}
     steps:
-      - uses: sarisia/actions-status-discord@v1.16.0
       - uses: actions/checkout@v6
+      - uses: sarisia/actions-status-discord@v1.16.0
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEB_HOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ needs.simple_deployment_pipeline.result }}
           content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
           title: "Deployment Details"
