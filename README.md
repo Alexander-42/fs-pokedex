@@ -15,3 +15,4 @@ Start by running `npm install` inside the project folder
 ## Links
 
 - [Deployed pokedex](https://fs-pokedex-wcuv.onrender.com)
+- [Other repository used in exercises 21 and 22](https://github.com/Alexander-42/habitually)
